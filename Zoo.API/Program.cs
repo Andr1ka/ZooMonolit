@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Zoo.Core.Interfaces;
+using Zoo.Core.Services;
 using Zoo.Infrastructure.Data;
 using Zoo.Infrastructure.Repositories;
 
@@ -16,6 +17,7 @@ namespace Zoo.API
                 options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
 
             builder.Services.AddScoped<IAnimalRepository, AnimalRepository>();
+            builder.Services.AddScoped<IAnimalService, AnimalService>();
 
             builder.Services.AddControllersWithViews();
 

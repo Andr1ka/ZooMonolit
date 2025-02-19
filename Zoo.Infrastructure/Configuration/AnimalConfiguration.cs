@@ -19,6 +19,11 @@ namespace Zoo.Infrastructure.Configuration
                 .IsRequired()
                 .HasMaxLength(100);
 
+            builder.Property(e => e.TypeOfAnimal)
+                .IsRequired()
+                .HasMaxLength(100);
+
+
             builder.Property(e => e.Energy)
                 .IsRequired()
                 .HasDefaultValue((byte)100);

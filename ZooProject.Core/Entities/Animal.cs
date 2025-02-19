@@ -12,6 +12,8 @@ namespace Zoo.Core.Entities
 
         public string Name { get; set; }
 
+        public string TypeOfAnimal { get; set; }
+
         public byte Energy { get; set; }
     }
 }
