@@ -73,7 +73,7 @@ namespace Zoo.Infrastructure.Repositories
             };
         }
 
-        public async Task<AnimalResult<IEnumerable<Animal>>> GetAllAnimal()
+        public async Task<AnimalResult<IEnumerable<Animal>>> GetAllAnimals()
         {
             var animalsList = await _dbContext.Animals
                 .AsNoTracking()

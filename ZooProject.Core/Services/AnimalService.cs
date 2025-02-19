@@ -37,7 +37,7 @@ namespace Zoo.Core.Services
 
         public AnimalResult<Animal> DeleteAnimal(int id)
         {
-            var response = _animalRepository.GetAllAnimal();
+            var response = _animalRepository.DeleteAnimal(id);
 
             return new AnimalResult<Animal>
             {
@@ -55,9 +55,9 @@ namespace Zoo.Core.Services
             };
         }
 
-        public AnimalResult<IEnumerable<Animal>> GetAllAnimal()
+        public AnimalResult<IEnumerable<Animal>> GetAllAnimals()
         {
-            var response = _animalRepository.GetAllAnimal();
+            var response = _animalRepository.GetAllAnimals();
 
             return new AnimalResult<IEnumerable<Animal>>
             {
