@@ -19,7 +19,7 @@ namespace Zoo.Core.Services
         }
 
 
-        public AnimalResult<Animal> AddNewAnimal(Animal animal)
+        public async Task<AnimalResult<Animal>> AddNewAnimal(Animal animal)
         {
             if (animal.Name is null || animal.TypeOfAnimal is null) new AnimalResult<Animal>
             {
@@ -27,52 +27,53 @@ namespace Zoo.Core.Services
             };
 
             animal.Energy = 100;
-            var response = _animalRepository.AddNewAnimal(animal);
+            var response = await _animalRepository.AddNewAnimal(animal);
 
             return new AnimalResult<Animal>
             {
-                Success = response.Result.Success
+                Success = response.Success
             };
         }
 
-        public AnimalResult<Animal> DeleteAnimal(int id)
+        public async Task<AnimalResult<Animal>> DeleteAnimal(int id)
         {
-            var response = _animalRepository.DeleteAnimal(id);
+            var response = await _animalRepository.DeleteAnimal(id);
 
             return new AnimalResult<Animal>
             {
-                Success = response.Result.Success,
+                Success = response.Success,
             };
         }
 
-        public AnimalResult<Animal> FeedAnimal(int id, byte food)
+        public async Task<AnimalResult<Animal>> FeedAnimal(int id, byte food)
         {
             
-            var response = _animalRepository.FeedAnimal(id,food);
+            var response = await _animalRepository.FeedAnimal(id,food);
             return new AnimalResult<Animal> 
             {
-                Success = response.Result.Success
+                Success = response.Success
             };
         }
 
-        public AnimalResult<IEnumerable<Animal>> GetAllAnimals()
+        public async Task<AnimalResult<IEnumerable<Animal>>> GetAllAnimals()
         {
-            var response = _animalRepository.GetAllAnimals();
+            var response = await _animalRepository.GetAllAnimals();
 
             return new AnimalResult<IEnumerable<Animal>>
             {
-                Success = response.Result.Success,
-                Data = response.Result.Data
+                Success = response.Success,
+                Data = response.Data
             };
         }
 
-        public AnimalResult<Animal> GetById(int id)
+        public async Task<AnimalResult<Animal>> GetById(int id)
         {
-            var response =_animalRepository.GetById(id);
+            var response = await _animalRepository.GetById(id);
+
             return new AnimalResult<Animal>
             {
-                Success = response.Result.Success,
-                Data = response.Result.Data
+                Success = response.Success,
+                Data = response.Data
             };
 
 
