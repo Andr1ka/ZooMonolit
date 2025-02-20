@@ -16,9 +16,9 @@ namespace Zoo.API.Controllers
         }
 
         [HttpGet]
-        public IActionResult GetAllAnimals()
+        public async Task<IActionResult> GetAllAnimals()
         {
-            var response = _animalService.GetAllAnimals();
+             var response = await _animalService.GetAllAnimals();
             if (!response.Success)
             {
                 return NoContent();
@@ -31,9 +31,9 @@ namespace Zoo.API.Controllers
         }
 
         [HttpGet("{id}")]
-        public IActionResult GetById(int id)
+        public async Task<IActionResult> GetById(int id)
         {
-            var response = _animalService.GetById(id);
+            var response = await _animalService.GetById(id);
             if (!response.Success)
             {
                 return NotFound();
@@ -45,9 +45,9 @@ namespace Zoo.API.Controllers
         }
 
         [HttpPost]
-        public IActionResult AddNewAnimal([FromBody] Animal animal)
+        public async Task<IActionResult> AddNewAnimal([FromBody] Animal animal)
         {
-            var response = _animalService.AddNewAnimal(animal);
+            var response = await _animalService.AddNewAnimal(animal);
             if (!response.Success)
             {
                 return BadRequest();
@@ -58,14 +58,15 @@ namespace Zoo.API.Controllers
         }
 
         [HttpPut("{id}/feed")]
-        public IActionResult FeedAnimal(int id,byte food)
+        public async Task<IActionResult> FeedAnimal(int id,byte food)
         {
-            if (!_animalService.GetById(id).Success)
+            var IsExisting = await _animalService.GetById(id);
+            if (!IsExisting.Success)
             {
                 return NotFound();
             }
 
-            var response = _animalService.FeedAnimal(id, food);
+            var response = await _animalService.FeedAnimal(id, food);
             if (!response.Success)
             {
                 return BadRequest();
@@ -78,9 +79,9 @@ namespace Zoo.API.Controllers
 
 
         [HttpDelete("{id}")]
-        public IActionResult DeleteAnimal(int id) 
+        public async Task<IActionResult> DeleteAnimal(int id) 
         {
-            var response = _animalService.DeleteAnimal(id);
+            var response = await _animalService.DeleteAnimal(id);
             if (!response.Success)
             {
                 return NotFound();

@@ -10,10 +10,10 @@ namespace Zoo.Core.Interfaces
 {
     public interface IAnimalService
     {
-        public AnimalResult<IEnumerable<Animal>> GetAllAnimals();
-        public AnimalResult<Animal> GetById(int id);
-        public AnimalResult<Animal> AddNewAnimal(Animal animal);
-        public AnimalResult<Animal> FeedAnimal(int id, byte food);
-        public AnimalResult<Animal> DeleteAnimal(int id);
+        public Task<AnimalResult<IEnumerable<Animal>>> GetAllAnimals();
+        public Task<AnimalResult<Animal>> GetById(int id);
+        public Task<AnimalResult<Animal>> AddNewAnimal(Animal animal);
+        public Task<AnimalResult<Animal>> FeedAnimal(int id, byte food);
+        public Task<AnimalResult<Animal>> DeleteAnimal(int id);
     }
 }
