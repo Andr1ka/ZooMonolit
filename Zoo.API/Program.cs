@@ -1,5 +1,8 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using System;
+using System.IO;
+using System.Reflection;
 using Zoo.Core.Interfaces;
 using Zoo.Core.Services;
 using Zoo.Infrastructure.Data;
@@ -31,6 +34,12 @@ namespace Zoo.API
                     Version = "v1",
                     Description = "API дл€ управлени€ животными в зоопарке"
                 });
+
+                // ¬ключение XML-документации
+                var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+                var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+                c.IncludeXmlComments(xmlPath);
+
             });
 
             var app = builder.Build();
