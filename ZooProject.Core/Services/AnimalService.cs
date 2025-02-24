@@ -14,12 +14,11 @@ namespace Zoo.Core.Services
     public class AnimalService : IAnimalService
     {
         private readonly IAnimalRepository _animalRepository;
-        private readonly AnimalSettings _animalSettings;
+        private readonly byte defaultAimal = AnimalSettings.DefaultEnergy;
 
-        public AnimalService(IAnimalRepository animalRepository, AnimalSettings animalSettings)
+        public AnimalService(IAnimalRepository animalRepository)
         {
             _animalRepository = animalRepository;
-            _animalSettings = animalSettings;
         }
 
 
@@ -30,7 +29,7 @@ namespace Zoo.Core.Services
                 Success = false
             };
 
-            animal.Energy = _animalSettings.DefaultEnergy;
+            animal.Energy = defaultAimal;
             var response = await _animalRepository.AddNewAnimal(animal);
 
             return new AnimalResult<Animal>

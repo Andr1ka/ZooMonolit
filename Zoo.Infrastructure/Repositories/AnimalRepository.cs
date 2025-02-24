@@ -15,11 +15,10 @@ namespace Zoo.Infrastructure.Repositories
     public class AnimalRepository : IAnimalRepository
     {
         private readonly ZooDbContext _dbContext;
-        private readonly AnimalSettings _animalSettings;
-        public AnimalRepository(ZooDbContext animalRepository, AnimalSettings animalSettings)
+        private readonly byte defaultAnimal = AnimalSettings.DefaultEnergy;
+        public AnimalRepository(ZooDbContext animalRepository)
         {
             _dbContext = animalRepository;
-            _animalSettings = animalSettings;
 
         }
 
@@ -67,7 +66,7 @@ namespace Zoo.Infrastructure.Repositories
                 };
 
             var animal = animalResult.Data;
-            animal.Energy = (byte)Math.Min(animal.Energy + food, _animalSettings.DefaultEnergy);
+            animal.Energy = (byte)Math.Min(animal.Energy + food, defaultAnimal);
             _dbContext.Animals.Update(animal);
             await _dbContext.SaveChangesAsync();
             return new AnimalResult<Animal>

@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace Zoo.Infrastructure.Configuration
 {
-    public class AnimalSettings
+    public static class AnimalSettings
     {
-        public byte DefaultEnergy { get; set; }
+        public const byte DefaultEnergy = 100;
     }
 }

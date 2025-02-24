@@ -23,7 +23,6 @@ namespace Zoo.API
 
             builder.Services.AddScoped<IAnimalRepository, AnimalRepository>();
             builder.Services.AddScoped<IAnimalService, AnimalService>();
-            builder.Services.Configure<AnimalSettings>(builder.Configuration.GetSection("AnimalSettings"));
 
             builder.Services.AddControllers();
 
