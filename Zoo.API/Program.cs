@@ -7,6 +7,8 @@ using Zoo.Core.Interfaces;
 using Zoo.Core.Services;
 using Zoo.Infrastructure.Data;
 using Zoo.Infrastructure.Repositories;
+using Zoo.Infrastructure.Configuration;
+
 
 namespace Zoo.API
 {
@@ -21,6 +23,7 @@ namespace Zoo.API
 
             builder.Services.AddScoped<IAnimalRepository, AnimalRepository>();
             builder.Services.AddScoped<IAnimalService, AnimalService>();
+            builder.Services.Configure<AnimalSettings>(builder.Configuration.GetSection("AnimalSettings"));
 
             builder.Services.AddControllers();
 

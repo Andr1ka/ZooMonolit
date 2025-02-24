@@ -6,16 +6,20 @@ using System.Threading.Tasks;
 using Zoo.Core.Entities;
 using Zoo.Core.Interfaces;
 using Zoo.Core.Responses;
+using Zoo.Infrastructure.Configuration;
+
 
 namespace Zoo.Core.Services
 {
     public class AnimalService : IAnimalService
     {
         private readonly IAnimalRepository _animalRepository;
+        private readonly AnimalSettings _animalSettings;
 
-        public AnimalService(IAnimalRepository animalRepository)
+        public AnimalService(IAnimalRepository animalRepository, AnimalSettings animalSettings)
         {
             _animalRepository = animalRepository;
+            _animalSettings = animalSettings;
         }
 
 
@@ -26,7 +30,7 @@ namespace Zoo.Core.Services
                 Success = false
             };
 
-            animal.Energy = 100;
+            animal.Energy = _animalSettings.DefaultEnergy;
             var response = await _animalRepository.AddNewAnimal(animal);
 
             return new AnimalResult<Animal>
