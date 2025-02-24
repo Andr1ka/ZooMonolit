@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Zoo.Core.Entities;
 using Zoo.Core.Interfaces;
 using Zoo.Core.Responses;
+using Zoo.Infrastructure.Configuration;
 using Zoo.Infrastructure.Data;
 
 namespace Zoo.Infrastructure.Repositories
@@ -14,9 +15,12 @@ namespace Zoo.Infrastructure.Repositories
     public class AnimalRepository : IAnimalRepository
     {
         private readonly ZooDbContext _dbContext;
-        public AnimalRepository(ZooDbContext animalRepository)
+        private readonly AnimalSettings _animalSettings;
+        public AnimalRepository(ZooDbContext animalRepository, AnimalSettings animalSettings)
         {
             _dbContext = animalRepository;
+            _animalSettings = animalSettings;
+
         }
 
         public async Task<AnimalResult<Animal>> AddNewAnimal(Animal animal)
@@ -63,7 +67,7 @@ namespace Zoo.Infrastructure.Repositories
                 };
 
             var animal = animalResult.Data;
-            animal.Energy = (byte)Math.Min(animal.Energy + food, 100);
+            animal.Energy = (byte)Math.Min(animal.Energy + food, _animalSettings.DefaultEnergy);
             _dbContext.Animals.Update(animal);
             await _dbContext.SaveChangesAsync();
             return new AnimalResult<Animal>
